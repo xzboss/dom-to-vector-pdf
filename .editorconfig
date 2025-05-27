@@ -1,0 +1,17 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# 顶层配置文件
+root = true
+
+# 所有文件
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Markdown 文件
+[*.md]
+trim_trailing_whitespace = false 
