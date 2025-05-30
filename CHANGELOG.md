@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.3 (2025-05-30)
+
+
+### Features
+
+* init ([275ab7f](https://github.com/xzboss/dom-to-vector-pdf/commit/275ab7fe62bb8df84e074c2211d47f22f63f6833))
+* 支持自定字体id ([f66dfaf](https://github.com/xzboss/dom-to-vector-pdf/commit/f66dfafcd0436ee4f1787dd8d73641d9fd344422))
+
 ### 0.0.2 (2025-05-30)
 
 
