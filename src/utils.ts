@@ -1,9 +1,11 @@
+import type { FontManager } from './font-manager';
+
 /**
  * 转换字体字重
  * @param weight 字体粗细
  * @returns 标准化后的字重
  */
-export function normalizeFontWeight(weight?: string | number): string {
+export function normalizeFontWeight(weight?: string | number | null): string {
   const weightMap: any = {
     normal: '400',
     bold: '700',
@@ -68,7 +70,7 @@ export function inlineSvgSymbols(element: HTMLElement | SVGElement): void {
 /**
  * 递归处理SVG元素的字体属性
  */
-export function processSvgFonts(element: Element): void {
+export function processSvgFonts(element: Element, fontManager: FontManager): void {
   if (element.classList.contains('no-print')) {
     element.remove();
     return;
@@ -92,7 +94,7 @@ export function processSvgFonts(element: Element): void {
 
     // TODO
     if (fontFamily) {
-      element.setAttribute('font-family', 'PingFang');
+      element.setAttribute('font-family', fontManager.getFontId());
       element.setAttribute('font-weight', normalizeFontWeight(fontWeight));
     }
 
@@ -104,5 +106,5 @@ export function processSvgFonts(element: Element): void {
   }
 
   // 递归处理子元素
-  Array.from(element.children).forEach((child) => processSvgFonts(child));
+  Array.from(element.children).forEach((child) => processSvgFonts(child, fontManager));
 }

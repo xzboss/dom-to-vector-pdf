@@ -38,7 +38,7 @@ export class DomToPdfConverter {
       this.prepareSvgElement(svgElement);
 
       // 4. 处理SVG字体
-      processSvgFonts(svgElement);
+      processSvgFonts(svgElement, this.fontManager);
 
       // 调用生命周期钩子
       hooks?.beforeSvgConvert?.(svgElement);

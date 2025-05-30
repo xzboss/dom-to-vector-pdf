@@ -10,8 +10,16 @@ export class FontManager {
   private registeredFonts: Map<string, ArrayBuffer> = new Map();
   private pdfInstance?: jsPDF | null;
   private callbackList: (() => void)[] = [];
+  private fontId: string = 'PingFang';
 
   private constructor() {}
+
+  /**
+   * 获取字体ID
+   */
+  public getFontId(): string {
+    return this.fontId;
+  }
 
   /**
    * 获取字体管理器单例
@@ -26,7 +34,7 @@ export class FontManager {
   /**
    * 设置PDF实例
    */
-  public setPdfInstance(pdf: jsPDF): void {
+  public setPdfInstance(pdf: jsPDF | null): void {
     this.pdfInstance = pdf;
     this.callbackList.forEach((callback) => callback());
     this.callbackList = [];
@@ -36,6 +44,7 @@ export class FontManager {
    * 注册字体
    */
   public registerFont(options: FontRegisterOptions): void {
+    this.fontId = options.fontId;
     this.addFontToPdf(options);
   }
 
