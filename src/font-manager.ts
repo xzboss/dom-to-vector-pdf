@@ -3,7 +3,7 @@ import type { FontRegisterOptions } from './types';
 import { normalizeFontWeight } from './utils';
 
 /**
- * 字体管理器
+ * Font manager
  */
 export class FontManager {
   private static instance: FontManager;
@@ -15,14 +15,14 @@ export class FontManager {
   private constructor() {}
 
   /**
-   * 获取字体ID
+   * Get font ID
    */
   public getFontId(): string {
     return this.fontId;
   }
 
   /**
-   * 获取字体管理器单例
+   * Get font manager singleton
    */
   public static getInstance(): FontManager {
     if (!FontManager.instance) {
@@ -32,7 +32,7 @@ export class FontManager {
   }
 
   /**
-   * 设置PDF实例
+   * Set PDF instance
    */
   public setPdfInstance(pdf: jsPDF | null): void {
     this.pdfInstance = pdf;
@@ -41,7 +41,7 @@ export class FontManager {
   }
 
   /**
-   * 注册字体
+   * Register font
    */
   public registerFont(options: FontRegisterOptions): void {
     this.fontId = options.fontId;
@@ -49,14 +49,14 @@ export class FontManager {
   }
 
   /**
-   * 批量注册字体
+   * Batch register fonts
    */
   public registerFonts(options: FontRegisterOptions[]): void {
     options.map((font) => this.registerFont(font));
   }
 
   /**
-   * 添加字体到PDF实例
+   * Add font to PDF instance
    */
   private addFontToPdf(options: FontRegisterOptions): void {
     if (!this.pdfInstance) {

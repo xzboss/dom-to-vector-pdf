@@ -1,9 +1,9 @@
 import type { FontManager } from './font-manager';
 
 /**
- * 转换字体字重
- * @param weight 字体粗细
- * @returns 标准化后的字重
+ * Convert font weight
+ * @param weight Font weight
+ * @returns Normalized font weight
  */
 export function normalizeFontWeight(weight?: string | number | null): string {
   const weightMap: any = {
@@ -14,7 +14,7 @@ export function normalizeFontWeight(weight?: string | number | null): string {
 }
 
 /**
- * 计算SVG symbol的缩放比例
+ * Calculate SVG symbol scale ratio
  */
 export function calculateSymbolScale(symbol: SVGElement): number {
   const viewBox = symbol.getAttribute('viewBox');
@@ -29,7 +29,7 @@ export function calculateSymbolScale(symbol: SVGElement): number {
 }
 
 /**
- * 内联SVG中的symbol元素
+ * Symbol element in inline SVG
  */
 export function inlineSvgSymbols(element: HTMLElement | SVGElement): void {
   const uses = element.querySelectorAll('use');
@@ -45,30 +45,30 @@ export function inlineSvgSymbols(element: HTMLElement | SVGElement): void {
       return;
     }
 
-    // 创建 <g> 容器保留所有属性
+    // Create <g> container preserving all attributes
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 
-    // 复制除href外的所有属性
+    // Copy all attributes except href
     Array.from(use.attributes).forEach((attr) => {
       if (attr.name !== 'xlink:href' && attr.name !== 'href') {
         g.setAttribute(attr.name, attr.value);
       }
     });
 
-    // 插入缩放后的路径
+    // Insert scaled path
     g.innerHTML = `
         <g transform="scale(${calculateSymbolScale(symbol)})">
           ${symbol.innerHTML}
         </g>
       `;
 
-    // 替换并保留父SVG尺寸
+    // Replace and preserve parent SVG dimensions
     use.replaceWith(g);
   });
 }
 
 /**
- * 递归处理SVG元素的字体属性
+ * Recursively process SVG element font attributes
  */
 export function processSvgFonts(element: Element, fontManager: FontManager): void {
   if (element.classList.contains('no-print')) {
@@ -77,7 +77,7 @@ export function processSvgFonts(element: Element, fontManager: FontManager): voi
   }
 
   if (element.tagName === 'text' || element.tagName === 'tspan') {
-    // 解析style字符串
+    // Parse style string
     const style = element.getAttribute('style');
     if (style) {
       style.split(';').forEach((css: string) => {
@@ -98,13 +98,13 @@ export function processSvgFonts(element: Element, fontManager: FontManager): voi
       element.setAttribute('font-weight', normalizeFontWeight(fontWeight));
     }
 
-    // 调整y坐标
+    // Adjust y coordinate
     const y = element.getAttribute('y');
     if (y) {
       element.setAttribute('y', String(Number(y) - 3));
     }
   }
 
-  // 递归处理子元素
+  // Recursively process child elements
   Array.from(element.children).forEach((child) => processSvgFonts(child, fontManager));
 }

@@ -6,7 +6,7 @@ import type { ExportPdfOptions, LifecycleHooks } from './types';
 import { inlineSvgSymbols, processSvgFonts } from './utils';
 
 /**
- * DOM转PDF转换器
+ * DOM to PDF Converter
  */
 export class DomToPdfConverter {
   private fontManager: FontManager;
@@ -16,20 +16,20 @@ export class DomToPdfConverter {
   }
 
   /**
-   * 导出PDF
+   * Export PDF
    */
   public async exportPdf(options: ExportPdfOptions, hooks?: LifecycleHooks): Promise<void> {
     try {
-      // 1. 获取并克隆DOM元素
+      // 1. Get and clone DOM element
       const { element, parentElement } = this.prepareDomElement(options.id);
 
-      // 调用生命周期钩子
+      // Call lifecycle hook
       hooks?.afterDomClone?.(element);
 
-      // 2. 处理SVG符号
+      // 2. Process SVG symbols
       inlineSvgSymbols(element);
 
-      // 3. 转换为SVG
+      // 3. Convert to SVG
       const svgDocument = elementToSVG(element);
       parentElement?.removeChild(element);
 
@@ -37,27 +37,27 @@ export class DomToPdfConverter {
       document.body.appendChild(svgElement);
       this.prepareSvgElement(svgElement);
 
-      // 4. 处理SVG字体
+      // 4. Process SVG fonts
       processSvgFonts(svgElement, this.fontManager);
 
-      // 调用生命周期钩子
+      // Call lifecycle hook
       hooks?.beforeSvgConvert?.(svgElement);
 
-      // 5. 创建PDF文档
+      // 5. Create PDF document
       const pdf = this.createPdfDocument(svgElement);
       this.fontManager.setPdfInstance(pdf);
 
-      // 6. 绘制SVG内容到PDF
+      // 6. Draw SVG content to PDF
       await this.renderSvgToPdf(svgElement, pdf);
 
-      // 调用生命周期钩子
+      // Call lifecycle hook
       hooks?.beforePdfGenerate?.(pdf);
       hooks?.beforePdfSave?.(pdf);
 
-      // 7. 保存PDF
+      // 7. Save PDF
       pdf.save(`${options.filename}.pdf`);
 
-      // 8. 清理临时元素
+      // 8. Clean up temporary elements
       svgElement.remove();
       this.fontManager.setPdfInstance(null);
     } catch (error) {
@@ -67,7 +67,7 @@ export class DomToPdfConverter {
   }
 
   /**
-   * 准备DOM元素
+   * Prepare DOM element
    */
   private prepareDomElement(id: string): {
     element: HTMLElement;
@@ -81,7 +81,7 @@ export class DomToPdfConverter {
     const parentElement = originElement.parentElement;
     const element = originElement.cloneNode(true) as HTMLElement;
 
-    // 设置克隆元素的样式
+    // Set cloned element styles
     element.style.cssText = `
           z-index: -999999;
           position: absolute;
@@ -94,7 +94,7 @@ export class DomToPdfConverter {
   }
 
   /**
-   * 准备SVG元素
+   * Prepare SVG element
    */
   private prepareSvgElement(svgElement: SVGElement): void {
     svgElement.style.cssText = `
@@ -106,13 +106,13 @@ export class DomToPdfConverter {
       z-index: -999999;
     `;
 
-    // 添加XML声明
+    // Add XML declaration
     const utf8Declaration = document.createTextNode('<?xml version="1.0" encoding="utf-8"?>');
     svgElement.insertBefore(utf8Declaration, svgElement.firstChild);
   }
 
   /**
-   * 创建PDF文档
+   * Create PDF document
    */
   private createPdfDocument(svgElement: SVGElement): jsPDF {
     const { width, height } = svgElement.getBoundingClientRect();
@@ -125,7 +125,7 @@ export class DomToPdfConverter {
   }
 
   /**
-   * 渲染SVG到PDF
+   * Render SVG to PDF
    */
   private async renderSvgToPdf(svgElement: SVGElement, pdf: jsPDF): Promise<void> {
     await svg2pdf(svgElement, pdf, {

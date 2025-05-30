@@ -1,27 +1,79 @@
 # dom-to-vector-pdf
 
-DOM 转矢量 PDF
+A tool for converting DOM elements to vector PDFs using jsPDF, dom-to-svg and svg2pdf.js.
 
-1. 克隆元素时对原页面的影响
-   - 内联控制（current）
-     - 样式优先级
-   - Shadow DOM
-   - iframe
-2. iconfont 大小问题：目前是默认 16px 字体大小来做的缩放
-3. 原来的 DOM 中本身存在的 SVG 标签是用的内联样式来决定的样式
-   - 目前只支持内联中属性名和元素属性名一致的情况
-4. 页面整体转换出来的文字对比背景要偏下一点
-   - 目前是暂时所有文字整体上移 3 个像素单位
-5. 不支持项
+## Basic Usage
 
-- 目前不支持导出图片背景
-- 目前不支持 canvas 导出
+```javascript
+import vectorInstance from "dom-to-vector-pdf";
 
-6. 字体
+export const ExportToPDF = (id, title) => {
+  vectorInstance.registerFont([
+    {
+      font: PingFangRegular,
+      fontId: "PingFang",
+      fontWeight: "400",
+      fontStyle: "normal",
+    },
+    {
+      font: PingFangHeavy,
+      fontId: "PingFang",
+      fontWeight: "700",
+      fontStyle: "normal",
+    },
+  ]);
+  vectorInstance.export({
+    id,
+    filename: title,
+  });
+};
+```
 
-- 目前只支持一种，注册字体时 fontId 必须一样
-- 多种字体考虑兼容 woff2 格式
+## Features
 
-7. 图片
+- Converts DOM elements to vector PDFs
+- Preserves vector graphics and text
+- Supports SVG elements
+- Maintains font styles and weights
+- Handles complex layouts
 
-- 图片导出效果不理想
+## Todo List
+
+### DOM Cloning
+- [ ] Inline style handling
+  - [ ] Style priority management
+- [ ] Shadow DOM support
+- [ ] iframe support
+
+### Icon Fonts
+- [ ] Current implementation uses 16px as base font size for scaling
+- [ ] Need to improve icon font size handling
+
+### SVG Support
+- [ ] Currently only supports inline styles where property names match element attributes
+- [ ] Need to enhance SVG style handling
+
+### Text Alignment
+- [ ] Text appears slightly lower than background
+  - Current workaround: Shift all text up by 3 pixels
+
+### Unsupported Features
+- [ ] Image background export
+- [ ] Canvas export
+
+### Font Support
+- [ ] Currently limited to single font family
+  - Font ID must be consistent during registration
+- [ ] Need to add support for multiple fonts
+- [ ] Consider WOFF2 format compatibility
+
+### Image Export
+- [ ] Image export quality needs improvement
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+MIT

@@ -3,7 +3,7 @@ import { FontManager } from './font-manager';
 import type { ExportPdfOptions, FontRegisterOptions, LifecycleHooks } from './types';
 
 /**
- * DOM转PDF工具实例
+ * DOM to PDF tool instance
  */
 class DOMToPDF {
   private converter: DomToPdfConverter;
@@ -15,17 +15,17 @@ class DOMToPDF {
   }
 
   /**
-   * 导出PDF
-   * @param options 导出配置
-   * @param hooks 生命周期钩子
+   * Export PDF
+   * @param options Export configuration
+   * @param hooks Lifecycle hooks
    */
   public async exportPDF(options: ExportPdfOptions, hooks?: LifecycleHooks): Promise<void> {
     await this.converter.exportPdf(options, hooks);
   }
 
   /**
-   * 注册字体
-   * @param options 字体注册选项
+   * Register font
+   * @param options Font registration options
    */
   public registerFont(options: FontRegisterOptions | FontRegisterOptions[]): void {
     if (Array.isArray(options)) {
@@ -36,6 +36,6 @@ class DOMToPDF {
   }
 }
 
-// 导出单例实例
+// Export singleton instance
 export const instance = new DOMToPDF();
 export default instance;
