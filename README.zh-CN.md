@@ -17,7 +17,7 @@ npm install dom-to-vector-pdf
 | id | string | 必填 | 要导出的DOM元素ID |
 | filename | string | 必填 | 导出的PDF文件名 |
 | orientation | 'portrait' \| 'landscape' | 'portrait' | PDF方向 |
-| unit | 'pt' \| 'px' \| 'in' \| 'mm' \| 'cm' \| 'ex' \| 'em' \| 'pc' | 'px' | 测量单位 |
+| unit | 'px' | 测量单位（只支持px） |
 | beforeSvgConvert | (svgElement: SVGElement) => void | - | SVG元素处理钩子 |
 | beforePdfSave | (pdf: jsPDF) => void | - | PDF文档处理钩子 |
 
@@ -59,7 +59,7 @@ export const ExportToPDF = (id, title) => {
       fontStyle: "normal",
     },
   ]);
-  vectorInstance.export({
+  vectorInstance.exportPDF({
     id,
     filename: title,
   });
@@ -97,6 +97,7 @@ export const ExportToPDF = (id, title) => {
 ### 不支持的功能
 - [ ] 图片背景导出
 - [ ] Canvas导出
+- [ ] 其他单位支持
 
 ### 字体支持
 - [ ] 目前仅限于单个字体系列

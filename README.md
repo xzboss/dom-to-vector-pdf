@@ -17,7 +17,7 @@ npm install dom-to-vector-pdf
 | id | string | required | DOM element ID to export |
 | filename | string | required | Exported PDF file name |
 | orientation | 'portrait' \| 'landscape' | 'portrait' | PDF orientation |
-| unit | 'pt' \| 'px' \| 'in' \| 'mm' \| 'cm' \| 'ex' \| 'em' \| 'pc' | 'px' | Unit for measurements |
+| unit | 'px' | Unit for measurements(only px) |
 | beforeSvgConvert | (svgElement: SVGElement) => void | - | Custom hook for processing SVG elements |
 | beforePdfSave | (pdf: jsPDF) => void | - | Custom hook for processing PDF document |
 
@@ -59,7 +59,7 @@ export const ExportToPDF = (id, title) => {
       fontStyle: "normal",
     },
   ]);
-  vectorInstance.export({
+  vectorInstance.exportPDF({
     id,
     filename: title,
   });
@@ -97,6 +97,7 @@ export const ExportToPDF = (id, title) => {
 ### Unsupported Features
 - [ ] Image background export
 - [ ] Canvas export
+- [ ] other unit
 
 ### Font Support
 - [ ] Currently limited to single font family
