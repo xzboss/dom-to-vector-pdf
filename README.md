@@ -2,6 +2,43 @@
 
 A tool for converting DOM elements to vector PDFs using jsPDF, dom-to-svg and svg2pdf.js.
 
+## Installation
+
+```bash
+npm install dom-to-vector-pdf
+```
+
+## Configuration Options
+
+### Export Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| id | string | required | DOM element ID to export |
+| filename | string | required | Exported PDF file name |
+| orientation | 'portrait' \| 'landscape' | 'portrait' | PDF orientation |
+| unit | 'pt' \| 'px' \| 'in' \| 'mm' \| 'cm' \| 'ex' \| 'em' \| 'pc' | 'px' | Unit for measurements |
+| beforeSvgConvert | (svgElement: SVGElement) => void | - | Custom hook for processing SVG elements |
+| beforePdfSave | (pdf: jsPDF) => void | - | Custom hook for processing PDF document |
+
+### Font Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| font | string | required | Font file path or URL |
+| fontId | string | required | Font ID for identifying the font |
+| fontStyle | 'normal' \| 'italic' | 'normal' | Font style |
+| fontWeight | string \| number | - | Font weight (100-900) |
+
+### Lifecycle Hooks
+
+| Hook | Type | Description |
+|------|------|-------------|
+| afterDomClone | (clonedElement: HTMLElement) => void | Triggered after DOM clone |
+| beforeSvgConvert | (svgElement: SVGElement) => void | Triggered before SVG conversion |
+| beforePdfGenerate | (pdf: jsPDF) => void | Triggered before PDF generation |
+| beforePdfSave | (pdf: jsPDF) => void | Triggered before PDF save |
+
 ## Basic Usage
 
 ```javascript
