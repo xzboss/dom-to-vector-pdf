@@ -4,6 +4,7 @@
   "author": {
     "name": "xzboss"
   },
+  "license": "MIT",
   "description": "Convert DOM elements to vector PDFs using jsPDF, dom-to-svg and svg2pdf.js",
   "keywords": [
     "dom",
@@ -14,7 +15,17 @@
     "svg",
     "dom-to-svg",
     "svg2pdf.js",
-    "vector-pdf"
+    "vector-pdf",
+    "html-to-pdf",
+    "web-to-pdf",
+    "dom-conversion",
+    "vector-graphics",
+    "pdf-generation",
+    "browser-pdf",
+    "client-side-pdf",
+    "web-pdf",
+    "html2pdf",
+    "dom2pdf"
   ],
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
