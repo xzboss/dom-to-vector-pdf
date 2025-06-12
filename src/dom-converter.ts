@@ -10,6 +10,7 @@ import { inlineSvgSymbols, processSvgFonts } from './utils';
  */
 export class DomToPdfConverter {
   private fontManager: FontManager;
+  private resourceQueue: Promise<void>[] = [];
 
   constructor() {
     this.fontManager = FontManager.getInstance();
@@ -29,7 +30,10 @@ export class DomToPdfConverter {
       // 2. Process SVG symbols
       inlineSvgSymbols(element);
 
-      // 3. Convert to SVG
+      // 3. Load resource
+      await this.loadResource(element);
+
+      // 4. Convert to SVG
       const svgDocument = elementToSVG(element);
       parentElement?.removeChild(element);
 
@@ -37,27 +41,27 @@ export class DomToPdfConverter {
       document.body.appendChild(svgElement);
       this.prepareSvgElement(svgElement);
 
-      // 4. Process SVG fonts
+      // 5. Process SVG fonts
       processSvgFonts(svgElement, this.fontManager);
 
       // Call lifecycle hook
       hooks?.beforeSvgConvert?.(svgElement);
 
-      // 5. Create PDF document
+      // 6. Create PDF document
       const pdf = this.createPdfDocument(svgElement);
       this.fontManager.setPdfInstance(pdf);
 
-      // 6. Draw SVG content to PDF
+      // 7. Draw SVG content to PDF
       await this.renderSvgToPdf(svgElement, pdf);
 
       // Call lifecycle hook
       hooks?.beforePdfGenerate?.(pdf);
       hooks?.beforePdfSave?.(pdf);
 
-      // 7. Save PDF
+      // 8. Save PDF
       pdf.save(`${options.filename}.pdf`);
 
-      // 8. Clean up temporary elements
+      // 9. Clean up temporary elements
       svgElement.remove();
       this.fontManager.setPdfInstance(null);
     } catch (error) {
@@ -134,5 +138,21 @@ export class DomToPdfConverter {
       width: pdf.internal.pageSize.getWidth(),
       height: pdf.internal.pageSize.getHeight(),
     });
+  }
+
+  /**
+   * Load resource
+   */
+  private async loadResource(element: HTMLElement | SVGElement): Promise<PromiseSettledResult<void>[]> {
+    this.resourceQueue = [];
+    const resources = element.querySelectorAll('img');
+    resources.forEach((resource) => {
+      this.resourceQueue.push(
+        new Promise((resolve) => {
+          resource.onload = () => resolve(void 0);
+        })
+      );
+    });
+    return Promise.allSettled(this.resourceQueue);
   }
 }
