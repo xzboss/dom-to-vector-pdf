@@ -95,7 +95,7 @@ export const ExportToPDF = (id, title) => {
   - Current workaround: Shift all text up by 3 pixels
 
 ### Unsupported Features
-- [ ] Image background export
+- [ ✅  ] Image background export
 - [ ] Canvas export
 - [ ] other unit
 
