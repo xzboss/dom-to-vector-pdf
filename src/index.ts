@@ -2,6 +2,9 @@ import { DomToPdfConverter } from './dom-converter';
 import { FontManager } from './font-manager';
 import type { ExportPdfOptions, FontRegisterOptions, LifecycleHooks } from './types';
 
+// Re-export types
+export type { ExportPdfOptions, FontRegisterOptions, LifecycleHooks } from './types';
+
 /**
  * DOM to PDF tool instance
  */

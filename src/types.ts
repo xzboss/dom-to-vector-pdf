@@ -4,14 +4,16 @@ import { jsPDF } from 'jspdf';
  * Export PDF配置项
  */
 export interface ExportPdfOptions {
-  /** DOM element ID to export */
-  id: string;
+  /** DOM element selector to export */
+  selector: string;
   /** Exported PDF file name */
   filename: string;
   /** PDF orientation, default is portrait */
   orientation?: 'portrait' | 'landscape';
   /** Unit, default is px */
   unit?: 'pt' | 'px' | 'in' | 'mm' | 'cm' | 'ex' | 'em' | 'pc';
+  /** resource load timeout, default is 5000 */
+  resourceTimeout?: number;
   /** Custom hook for processing SVG elements */
   beforeSvgConvert?: (svgElement: SVGElement) => void;
   /** Custom hook for processing PDF document */

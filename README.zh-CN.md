@@ -14,7 +14,7 @@ npm install dom-to-vector-pdf
 
 | 选项 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
-| id | string | 必填 | 要导出的DOM元素ID |
+| selector | string | 必填 | 要导出的DOM元素的CSS选择器 |
 | filename | string | 必填 | 导出的PDF文件名 |
 | orientation | 'portrait' \| 'landscape' | 'portrait' | PDF方向 |
 | unit | 'px' | 测量单位（只支持px） |
@@ -44,7 +44,7 @@ npm install dom-to-vector-pdf
 ```javascript
 import vectorInstance from "dom-to-vector-pdf";
 
-export const ExportToPDF = (id, title) => {
+export const ExportToPDF = (selector, title) => {
   vectorInstance.registerFont([
     {
       font: PingFangRegular,
@@ -60,7 +60,7 @@ export const ExportToPDF = (id, title) => {
     },
   ]);
   vectorInstance.exportPDF({
-    id,
+    selector,
     filename: title,
   });
 };

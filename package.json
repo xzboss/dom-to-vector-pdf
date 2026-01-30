@@ -29,14 +29,28 @@
   ],
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
+  "browser": "dist/index.umd.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.esm.js"
+    }
+  },
   "files": [
-    "dist",
+    "dist/index.js",
+    "dist/index.esm.js",
+    "dist/index.umd.js",
+    "dist/index.d.ts",
+    "dist/types.d.ts",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && rollup -c",
     "dev": "rollup -c -w",
     "test": "jest",
     "prepublishOnly": "npm run build",

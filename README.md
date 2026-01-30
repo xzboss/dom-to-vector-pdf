@@ -14,7 +14,7 @@ npm install dom-to-vector-pdf
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| id | string | required | DOM element ID to export |
+| selector | string | required | CSS selector for DOM element to export |
 | filename | string | required | Exported PDF file name |
 | orientation | 'portrait' \| 'landscape' | 'portrait' | PDF orientation |
 | unit | 'px' | Unit for measurements(only px) |
@@ -44,7 +44,7 @@ npm install dom-to-vector-pdf
 ```javascript
 import vectorInstance from "dom-to-vector-pdf";
 
-export const ExportToPDF = (id, title) => {
+export const ExportToPDF = (selector, title) => {
   vectorInstance.registerFont([
     {
       font: PingFangRegular,
@@ -60,7 +60,7 @@ export const ExportToPDF = (id, title) => {
     },
   ]);
   vectorInstance.exportPDF({
-    id,
+    selector,
     filename: title,
   });
 };

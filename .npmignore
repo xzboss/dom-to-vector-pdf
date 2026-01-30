@@ -1,0 +1,49 @@
+# Source files
+src/
+*.ts
+!*.d.ts
+
+# Config files
+tsconfig.json
+rollup.config.js
+.prettierrc
+.editorconfig
+
+# Git
+.git/
+.gitignore
+
+# CI/CD
+.github/
+
+# Development
+node_modules/
+*.log
+.DS_Store
+
+# Map files
+*.map
+
+# Internal type definitions (keep only index.d.ts)
+dist/dom-converter.d.ts
+dist/font-manager.d.ts
+dist/types.d.ts
+dist/utils.d.ts
+
+# Test files
+test/
+*.test.ts
+*.spec.ts
+
+# Linting
+.eslintrc*
+.prettierrc*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Husky
+.husky/
