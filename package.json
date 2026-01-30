@@ -68,7 +68,6 @@
   "dependencies": {
     "dom-to-svg": "^0.12.2",
     "jspdf": "^2.5.2",
-    "rollup": "^2.79.2",
     "svg2pdf.js": "^2.5.0"
   },
   "devDependencies": {
@@ -79,6 +78,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.2.3",
     "prettier": "^2.8.8",
+    "rollup": "^2.79.2",
     "standard-version": "^9.5.0",
     "tslib": "^2.8.1",
     "typescript": "^5.2.2"
