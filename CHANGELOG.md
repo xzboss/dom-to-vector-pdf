@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/xzboss/dom-to-vector-pdf/compare/v0.0.7...v1.0.0) (2026-01-30)
+
+
+### Bug Fixes
+
+* selector resourceloadtimeout ([8ca5436](https://github.com/xzboss/dom-to-vector-pdf/commit/8ca5436f39687a19994eae6db85a895517743bb7))
+
 ### [0.0.7](https://github.com/xzboss/dom-to-vector-pdf/compare/v0.0.6...v0.0.7) (2025-06-12)
 
 ### [0.0.6](https://github.com/xzboss/dom-to-vector-pdf/compare/v0.0.5...v0.0.6) (2025-06-12)
