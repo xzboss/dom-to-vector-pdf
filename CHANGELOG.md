@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.3](https://github.com/xzboss/dom-to-vector-pdf/compare/v1.0.2...v1.0.3) (2026-02-06)
+
+
+### Bug Fixes
+
+* remove log ([04c27d5](https://github.com/xzboss/dom-to-vector-pdf/commit/04c27d5eb2a953504e5cd064a722fdd1af8eb52f))
+
 ### [1.0.2](https://github.com/xzboss/dom-to-vector-pdf/compare/v1.0.1...v1.0.2) (2026-01-30)
 
 
