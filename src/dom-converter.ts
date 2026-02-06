@@ -32,72 +32,47 @@ export class DomToPdfConverter {
       // 1. Get and clone DOM element
       const { element, parentElement } = this.prepareDomElement(options.selector);
 
-      console.log(1);
-
       // Call lifecycle hook
       hooks?.afterDomClone?.(element);
-
-      console.log(2);
 
       // 2. Process SVG symbols
       inlineSvgSymbols(element);
 
-      console.log(3);
-
       // 3. Load resource
       await this.loadResource(element);
-
-      console.log(4);
 
       // 4. Convert to SVG
       const svgDocument = elementToSVG(element);
       parentElement?.removeChild(element);
 
-      console.log(5);
-
       const svgElement = svgDocument.documentElement as unknown as SVGElement;
       document.body.appendChild(svgElement);
       this.prepareSvgElement(svgElement);
 
-      console.log(6);
-
       // 5. Process SVG fonts
       processSvgFonts(svgElement, this.fontManager);
 
-      console.log(7);
-
       // Call lifecycle hook
       hooks?.beforeSvgConvert?.(svgElement);
-
-      console.log(8);
 
       // 6. Create PDF document
       const pdf = this.createPdfDocument(svgElement);
       this.fontManager.setPdfInstance(pdf);
 
-      console.log(9);
-
       // 7. Draw SVG content to PDF
       await this.renderSvgToPdf(svgElement, pdf);
-
-      console.log(10);
 
       // Call lifecycle hook
       hooks?.beforePdfGenerate?.(pdf);
       hooks?.beforePdfSave?.(pdf);
 
-      console.log(11);
-
       // 8. Save PDF
       pdf.save(`${options.filename}.pdf`);
-
-      console.log(12);
 
       // 9. Clean up temporary elements
       svgElement.remove();
       this.fontManager.setPdfInstance(null);
 
-      console.log(13);
     } catch (error) {
       console.error('生成PDF失败:', error);
       throw error;
@@ -205,7 +180,6 @@ export class DomToPdfConverter {
         })
       );
     });
-    console.log(this.resourceQueue, 'this.resourceQueue');
     return Promise.allSettled(this.resourceQueue);
   }
 }
