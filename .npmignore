@@ -1,17 +1,24 @@
-# Source files
+# Source
 src/
 *.ts
 !*.d.ts
 
-# Config files
+# Sub-projects
+docs/
+www/
+
+# Config
 tsconfig.json
 rollup.config.js
 .prettierrc
+.prettierignore
 .editorconfig
+commitlint.config.js
 
 # Git
 .git/
 .gitignore
+.gitattributes
 
 # CI/CD
 .github/
@@ -24,26 +31,17 @@ node_modules/
 # Map files
 *.map
 
-# Internal type definitions (keep only index.d.ts)
-dist/dom-converter.d.ts
-dist/font-manager.d.ts
-dist/types.d.ts
-dist/utils.d.ts
-
-# Test files
+# Test
 test/
 *.test.ts
 *.spec.ts
 
-# Linting
-.eslintrc*
-.prettierrc*
-
 # IDE
 .vscode/
 .idea/
-*.swp
-*.swo
 
 # Husky
 .husky/
+
+# Changelog
+CHANGELOG.md

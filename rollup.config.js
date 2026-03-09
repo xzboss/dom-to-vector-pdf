@@ -1,7 +1,7 @@
 import typescript from '@rollup/plugin-typescript';
 
 export default {
-  input: 'src/index.ts',
+  input: 'src/core/index.ts',
   output: [
     {
       file: 'dist/index.js',
@@ -30,7 +30,7 @@ export default {
       declaration: true,
       declarationDir: './dist',
       declarationMap: false,
-      rootDir: './src',
+      rootDir: './src/core',
     }),
   ],
 };
