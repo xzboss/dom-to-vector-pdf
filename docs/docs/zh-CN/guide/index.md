@@ -2,10 +2,39 @@
 
 一个使用 jsPDF、dom-to-svg 和 svg2pdf.js 将 DOM 元素转换为矢量 PDF 的工具。
 
+## 在线示例
+
 ## 安装
 
 ```bash
 npm install dom-to-vector-pdf
+```
+
+## 基本用法
+
+```javascript
+import fontTTF from '@/assets/your-font.ttf'
+
+import vectorInstance from "dom-to-vector-pdf";
+
+export const ExportToPDF = (selector, title) => {
+  vectorInstance.registerFont([
+    {
+      font: fontTTF,
+      fontWeight: "400",
+      fontStyle: "normal",
+    },
+    {
+      font: fontTTF,
+      fontWeight: "700",
+      fontStyle: "normal",
+    },
+  ]);
+  vectorInstance.exportPDF({
+    selector,
+    filename: title,
+  });
+};
 ```
 
 ## 配置选项
@@ -16,17 +45,12 @@ npm install dom-to-vector-pdf
 |------|------|--------|------|
 | selector | string | 必填 | 要导出的DOM元素的CSS选择器 |
 | filename | string | 必填 | 导出的PDF文件名 |
-| orientation | 'portrait' \| 'landscape' | 'portrait' | PDF方向 |
-| unit | 'px' | 测量单位（只支持px） |
-| beforeSvgConvert | (svgElement: SVGElement) => void | - | SVG元素处理钩子 |
-| beforePdfSave | (pdf: jsPDF) => void | - | PDF文档处理钩子 |
 
 ### 字体选项
 
 | 选项 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
 | font | string | 必填 | 字体文件路径或URL |
-| fontId | string | 必填 | 字体ID |
 | fontStyle | 'normal' \| 'italic' | 'normal' | 字体样式 |
 | fontWeight | string \| number | - | 字体粗细(100-900) |
 
@@ -39,32 +63,6 @@ npm install dom-to-vector-pdf
 | beforePdfGenerate | (pdf: jsPDF) => void | PDF生成前触发 |
 | beforePdfSave | (pdf: jsPDF) => void | PDF保存前触发 |
 
-## 基本用法
-
-```javascript
-import vectorInstance from "dom-to-vector-pdf";
-
-export const ExportToPDF = (selector, title) => {
-  vectorInstance.registerFont([
-    {
-      font: PingFangRegular,
-      fontId: "PingFang",
-      fontWeight: "400",
-      fontStyle: "normal",
-    },
-    {
-      font: PingFangHeavy,
-      fontId: "PingFang",
-      fontWeight: "700",
-      fontStyle: "normal",
-    },
-  ]);
-  vectorInstance.exportPDF({
-    selector,
-    filename: title,
-  });
-};
-```
 
 ## 特性
 
@@ -73,40 +71,16 @@ export const ExportToPDF = (selector, title) => {
 - 支持SVG元素
 - 保持字体样式和粗细
 - 处理复杂布局
+支持的样式可以在在线演示里面看见
 
-## 待办事项
+## 常见问题
+1. 字体目前只支持ttf，可以是项目直接import，也可以是在线cdn链接
+2. 字体包可以裁剪，一般包含常用字都能能裁剪到1MB以内。
+**⚠️⚠️⚠️这里很多在线裁剪的库裁剪完后不会包含空格**，导致渲染失败。这个最好用库来裁剪。
+这里提供汉字常用字https://github.com/xzboss/PingFangSC，有版权问题，我裁剪后的已经删除，只能大家自己去裁剪了。
 
-### DOM克隆
-- [ ] 内联样式处理
-  - [ ] 样式优先级管理
-- [ ] Shadow DOM支持
-- [ ] iframe支持
-
-### 图标字体
-- [ ] 当前实现使用16px作为基础字体大小进行缩放
-- [ ] 需要改进图标字体大小处理
-
-### SVG支持
-- [ ] 目前仅支持属性名与元素属性匹配的内联样式
-- [ ] 需要增强SVG样式处理
-
-### 文本对齐
-- [ ] 文本位置略低于背景
-  - 当前解决方案：将所有文本向上偏移3像素
-
-### 不支持的功能
-- [ ✅ ] 图片背景导出
-- [ ] Canvas导出
-- [ ] 其他单位支持
-
-### 字体支持
-- [ ] 目前仅限于单个字体系列
-  - 注册时字体ID必须保持一致
-- [ ] 需要添加多字体支持
-- [ ] 考虑WOFF2格式兼容性
-
-### 图片导出
-- [ ] 图片导出质量需要改进
+## 运行路径
+本库基于dom-to-svg，svg2pdf两个库做的，通过将dom转svg转pdf这样的链路实现。所以会有一层svg序列化的开销，但是一般来说不太影响性能。正常页面导出速度都挺快的，如果慢的话可能是字体包太大了，需要裁剪一下。
 
 ## 贡献
 

@@ -25,10 +25,7 @@ const tableData = ref<Employee[]>([
   { id: 6, name: 'Frank Wilson', department: 'Sales', role: 'Sales Director', email: 'frank@example.com', salary: 130000, status: 'Active', rating: 5, joinDate: '2019-09-14' },
   { id: 7, name: 'Grace Lee', department: 'HR', role: 'HR Specialist', email: 'grace@example.com', salary: 82000, status: 'Active', rating: 4, joinDate: '2022-06-30' },
   { id: 8, name: 'Henry Taylor', department: 'Engineering', role: 'DevOps Engineer', email: 'henry@example.com', salary: 115000, status: 'Active', rating: 4, joinDate: '2021-12-05' },
-  { id: 9, name: 'Iris Chen', department: 'Design', role: 'Graphic Designer', email: 'iris@example.com', salary: 78000, status: 'Active', rating: 3, joinDate: '2023-08-20' },
-  { id: 10, name: 'Jack Thompson', department: 'Finance', role: 'Financial Analyst', email: 'jack@example.com', salary: 92000, status: 'Active', rating: 4, joinDate: '2022-04-11' },
-  { id: 11, name: 'Karen White', department: 'Engineering', role: 'QA Engineer', email: 'karen@example.com', salary: 88000, status: 'On Leave', rating: 3, joinDate: '2023-02-17' },
-  { id: 12, name: 'Leo Garcia', department: 'Marketing', role: 'Content Writer', email: 'leo@example.com', salary: 72000, status: 'Active', rating: 4, joinDate: '2024-01-25' },
+  { id: 9, name: 'Iris Chen', department: 'Design', role: 'Graphic Designer', email: 'iris@example.com', salary: 78000, status: 'Active', rating: 3, joinDate: '2023-08-20' }
 ])
 
 const statusTagType = (status: string) => {

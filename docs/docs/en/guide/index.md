@@ -2,10 +2,39 @@
 
 A tool for converting DOM elements to vector PDFs using jsPDF, dom-to-svg and svg2pdf.js.
 
+## Online Demo
+
 ## Installation
 
 ```bash
 npm install dom-to-vector-pdf
+```
+
+## Basic Usage
+
+```javascript
+import fontTTF from '@/assets/your-font.ttf'
+
+import vectorInstance from "dom-to-vector-pdf";
+
+export const ExportToPDF = (selector, title) => {
+  vectorInstance.registerFont([
+    {
+      font: fontTTF,
+      fontWeight: "400",
+      fontStyle: "normal",
+    },
+    {
+      font: fontTTF,
+      fontWeight: "700",
+      fontStyle: "normal",
+    },
+  ]);
+  vectorInstance.exportPDF({
+    selector,
+    filename: title,
+  });
+};
 ```
 
 ## Configuration Options
@@ -14,19 +43,14 @@ npm install dom-to-vector-pdf
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| selector | string | required | CSS selector for DOM element to export |
+| selector | string | required | CSS selector for the DOM element to export |
 | filename | string | required | Exported PDF file name |
-| orientation | 'portrait' \| 'landscape' | 'portrait' | PDF orientation |
-| unit | 'px' | Unit for measurements(only px) |
-| beforeSvgConvert | (svgElement: SVGElement) => void | - | Custom hook for processing SVG elements |
-| beforePdfSave | (pdf: jsPDF) => void | - | Custom hook for processing PDF document |
 
 ### Font Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | font | string | required | Font file path or URL |
-| fontId | string | required | Font ID for identifying the font |
 | fontStyle | 'normal' \| 'italic' | 'normal' | Font style |
 | fontWeight | string \| number | - | Font weight (100-900) |
 
@@ -39,33 +63,6 @@ npm install dom-to-vector-pdf
 | beforePdfGenerate | (pdf: jsPDF) => void | Triggered before PDF generation |
 | beforePdfSave | (pdf: jsPDF) => void | Triggered before PDF save |
 
-## Basic Usage
-
-```javascript
-import vectorInstance from "dom-to-vector-pdf";
-
-export const ExportToPDF = (selector, title) => {
-  vectorInstance.registerFont([
-    {
-      font: PingFangRegular,
-      fontId: "PingFang",
-      fontWeight: "400",
-      fontStyle: "normal",
-    },
-    {
-      font: PingFangHeavy,
-      fontId: "PingFang",
-      fontWeight: "700",
-      fontStyle: "normal",
-    },
-  ]);
-  vectorInstance.exportPDF({
-    selector,
-    filename: title,
-  });
-};
-```
-
 ## Features
 
 - Converts DOM elements to vector PDFs
@@ -74,39 +71,13 @@ export const ExportToPDF = (selector, title) => {
 - Maintains font styles and weights
 - Handles complex layouts
 
-## Todo List
+Supported styles can be seen in the online demo.
 
-### DOM Cloning
-- [ ] Inline style handling
-  - [ ] Style priority management
-- [ ] Shadow DOM support
-- [ ] iframe support
+## FAQ
 
-### Icon Fonts
-- [ ] Current implementation uses 16px as base font size for scaling
-- [ ] Need to improve icon font size handling
+1. **Fonts**: Only TTF is supported. You can use a local import or a CDN URL. Font subsets can be used; a subset with common characters is usually under 1MB. **Many online subset tools omit the space character**, which can cause rendering to fail. Prefer a library for subsetting. A reference set of common Chinese characters is available at https://github.com/xzboss/PingFangSC (license applies; the repo does not include pre-subset fonts).
 
-### SVG Support
-- [ ] Currently only supports inline styles where property names match element attributes
-- [ ] Need to enhance SVG style handling
-
-### Text Alignment
-- [ ] Text appears slightly lower than background
-  - Current workaround: Shift all text up by 3 pixels
-
-### Unsupported Features
-- [ ✅  ] Image background export
-- [ ] Canvas export
-- [ ] other unit
-
-### Font Support
-- [ ] Currently limited to single font family
-  - Font ID must be consistent during registration
-- [ ] Need to add support for multiple fonts
-- [ ] Consider WOFF2 format compatibility
-
-### Image Export
-- [ ] Image export quality needs improvement
+2. **Pipeline**: This library is built on dom-to-svg and svg2pdf. The flow is DOM → SVG → PDF, so there is some SVG serialization overhead, but it usually does not affect performance. Export is typically fast; slowness is often due to large font files — consider subsetting.
 
 ## Contributing
 

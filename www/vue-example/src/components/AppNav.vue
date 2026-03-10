@@ -6,6 +6,7 @@ const route = useRoute()
 const navItems = [
   { path: '/css-properties', label: 'CSS Properties', icon: '🎨' },
   { path: '/components', label: 'Components', icon: '🧩' },
+  { path: '/chinese', label: '中文示例', icon: '📄' },
 ]
 </script>
 

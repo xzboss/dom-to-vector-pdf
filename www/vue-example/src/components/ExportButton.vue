@@ -2,15 +2,43 @@
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import domToVectorPdf from 'dom-to-vector-pdf'
-import dompdf from 'dompdf.js'
+import fontTTF from '@/assets/LXGWHeartSerifCHS-2.ttf'
 
 const loadingVector = ref(false)
-const loadingDompdf = ref(false)
 
 async function handleVectorExport() {
   loadingVector.value = true
   ElMessage.info('Generating PDF (dom-to-vector-pdf)...')
   try {
+    domToVectorPdf.registerFont([{
+      font: fontTTF,
+      fontWeight: '400',
+      fontStyle: 'normal',
+    }, {
+      font: fontTTF,
+      fontWeight: '500',
+      fontStyle: 'normal',
+    },
+    {
+      font: fontTTF,
+      fontWeight: '600',
+      fontStyle: 'normal',
+    }, {
+      font: fontTTF,
+      fontWeight: '700',
+      fontStyle: 'normal',
+    },
+    {
+      font: fontTTF,
+      fontWeight: '800',
+      fontStyle: 'normal',
+    },
+    {
+      font: fontTTF,
+      fontWeight: '900',
+      fontStyle: 'normal',
+    },
+    ])
     await domToVectorPdf.exportPDF({
       selector: '.app-main',
       filename: 'export-vector',
@@ -23,33 +51,6 @@ async function handleVectorExport() {
     loadingVector.value = false
   }
 }
-
-async function handleDompdfExport() {
-  const el = document.querySelector('.app-main') as HTMLElement
-  if (!el) {
-    ElMessage.error('Export target not found.')
-    return
-  }
-  loadingDompdf.value = true
-  ElMessage.info('Generating PDF (dompdf.js)...')
-  try {
-    const blob = await dompdf(el, { useCORS: true })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = 'export-dompdf.pdf'
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-    ElMessage.success('dompdf.js PDF exported!')
-  } catch (e) {
-    console.error('dompdf.js export failed:', e)
-    ElMessage.error('dompdf.js export failed.')
-  } finally {
-    loadingDompdf.value = false
-  }
-}
 </script>
 
 <template>
@@ -58,11 +59,6 @@ async function handleDompdfExport() {
       <span v-if="loadingVector" class="spinner" />
       <span v-else class="export-icon">&#8681;</span>
       <span>{{ loadingVector ? 'Exporting...' : 'dom-to-vector-pdf' }}</span>
-    </button>
-    <button class="export-fab" :disabled="loadingDompdf" @click="handleDompdfExport">
-      <span v-if="loadingDompdf" class="spinner" />
-      <span v-else class="export-icon">&#8681;</span>
-      <span>{{ loadingDompdf ? 'Exporting...' : 'dompdf.js' }}</span>
     </button>
   </div>
 </template>

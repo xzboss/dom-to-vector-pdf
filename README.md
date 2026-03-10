@@ -1,6 +1,10 @@
+[中文](README.zh-CN.md) ｜ [English](README.md)
+
 # dom-to-vector-pdf
 
 A tool for converting DOM elements to vector PDFs using jsPDF, dom-to-svg and svg2pdf.js.
+
+## Online Demo
 
 ## Installation
 
@@ -14,19 +18,14 @@ npm install dom-to-vector-pdf
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| selector | string | required | CSS selector for DOM element to export |
+| selector | string | required | CSS selector for the DOM element to export |
 | filename | string | required | Exported PDF file name |
-| orientation | 'portrait' \| 'landscape' | 'portrait' | PDF orientation |
-| unit | 'px' | Unit for measurements(only px) |
-| beforeSvgConvert | (svgElement: SVGElement) => void | - | Custom hook for processing SVG elements |
-| beforePdfSave | (pdf: jsPDF) => void | - | Custom hook for processing PDF document |
 
 ### Font Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | font | string | required | Font file path or URL |
-| fontId | string | required | Font ID for identifying the font |
 | fontStyle | 'normal' \| 'italic' | 'normal' | Font style |
 | fontWeight | string \| number | - | Font weight (100-900) |
 
@@ -42,19 +41,19 @@ npm install dom-to-vector-pdf
 ## Basic Usage
 
 ```javascript
+import fontTTF from '@/assets/your-font.ttf'
+
 import vectorInstance from "dom-to-vector-pdf";
 
 export const ExportToPDF = (selector, title) => {
   vectorInstance.registerFont([
     {
-      font: PingFangRegular,
-      fontId: "PingFang",
+      font: fontTTF,
       fontWeight: "400",
       fontStyle: "normal",
     },
     {
-      font: PingFangHeavy,
-      fontId: "PingFang",
+      font: fontTTF,
       fontWeight: "700",
       fontStyle: "normal",
     },
@@ -74,42 +73,16 @@ export const ExportToPDF = (selector, title) => {
 - Maintains font styles and weights
 - Handles complex layouts
 
-## Todo List
-
-### DOM Cloning
-- [ ] Inline style handling
-  - [ ] Style priority management
-- [ ] Shadow DOM support
-- [ ] iframe support
-
-### Icon Fonts
-- [ ] Current implementation uses 16px as base font size for scaling
-- [ ] Need to improve icon font size handling
-
-### SVG Support
-- [ ] Currently only supports inline styles where property names match element attributes
-- [ ] Need to enhance SVG style handling
-
-### Text Alignment
-- [ ] Text appears slightly lower than background
-  - Current workaround: Shift all text up by 3 pixels
-
-### Unsupported Features
-- [ ✅  ] Image background export
-- [ ] Canvas export
-- [ ] other unit
-
-### Font Support
-- [ ] Currently limited to single font family
-  - Font ID must be consistent during registration
-- [ ] Need to add support for multiple fonts
-- [ ] Consider WOFF2 format compatibility
-
-### Image Export
-- [ ] Image export quality needs improvement
-
 ## Contributing
 
+### Setup
+```
+pnpm i
+```
+### Run demo
+```
+pnpm dev:vue
+```
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License

@@ -29,7 +29,7 @@ export class FontManager {
   }
 
   public registerFont(options: FontRegisterOptions): void {
-    this.fontId = options.fontId;
+    this.fontId = options.fontId || 'font';
     this.addFontToPdf(options);
   }
 
@@ -44,7 +44,7 @@ export class FontManager {
     }
     this.pdfInstance.addFont(
       options.font,
-      options.fontId,
+      options.fontId || 'font',
       options.fontStyle || 'normal',
       normalizeFontWeight(options.fontWeight)
     );

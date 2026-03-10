@@ -17,6 +17,11 @@ const router = createRouter({
       name: 'Components',
       component: () => import('@/views/ComponentsDemo.vue'),
     },
+    {
+      path: '/chinese',
+      name: 'Chinese',
+      component: () => import('@/views/ChinesePage.vue'),
+    },
   ],
 })
 

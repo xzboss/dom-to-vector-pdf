@@ -27,7 +27,7 @@ export interface FontRegisterOptions {
   /** Font file path or URL */
   font: string;
   /** Font ID for identifying the font */
-  fontId: string;
+  fontId?: string;
   /** 字体样式 (normal/italic) */
   fontStyle?: 'normal' | 'italic';
   /** Font weight (100-900) */
