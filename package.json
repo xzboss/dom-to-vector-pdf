@@ -55,6 +55,9 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && rollup -c",
+    "build:vue": "pnpm --filter vue-example build",
+    "build:react": "pnpm --filter react-example build",
+    "build:docs": "pnpm --filter dom-to-vector-pdf-docs build",
     "dev": "rollup -c -w",
     "dev:vue": "pnpm --filter vue-example dev",
     "dev:react": "pnpm --filter react-example dev",
