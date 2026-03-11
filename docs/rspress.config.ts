@@ -3,8 +3,10 @@ import { defineConfig } from '@rspress/core';
 
 export default defineConfig({
   root: path.join(__dirname, 'docs'),
+  outDir: path.join(__dirname, '..', 'build', 'docs'),
+  base: '/docs/',
   title: 'DOM to Vector PDF',
-  lang: 'en',
+  lang: 'zh-CN',
   locales: [
     { lang: 'en', label: 'English' },
     { lang: 'zh-CN', label: '简体中文' },
