@@ -4,10 +4,10 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [vue()],
-  build: {
-    outDir: '../../build/vueExample',
-  },
-  base: '/vueExample/',
+  // build: {
+  //   outDir: '../../build/vueExample',
+  // },
+  // base: '/vueExample/',
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
