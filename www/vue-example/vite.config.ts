@@ -5,9 +5,9 @@ import { resolve } from 'path'
 export default defineConfig({
   plugins: [vue()],
   build: {
-    outDir: '../../build/vue-example',
+    outDir: '../../build/vueExample',
   },
-  base: '/vue-example/',
+  base: '/vueExample/',
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
