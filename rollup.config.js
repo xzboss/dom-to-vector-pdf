@@ -1,7 +1,8 @@
 import typescript from '@rollup/plugin-typescript';
+import dts from 'rollup-plugin-dts';
 
-export default {
-  input: 'src/index.ts',
+const jsConfig = {
+  input: 'src/core/index.ts',
   output: [
     {
       file: 'dist/index.js',
@@ -27,10 +28,17 @@ export default {
   plugins: [
     typescript({
       tsconfig: './tsconfig.json',
-      declaration: true,
-      declarationDir: './dist',
-      declarationMap: false,
-      rootDir: './src',
+      declaration: false,
+      rootDir: './src/core',
     }),
   ],
 };
+
+const dtsConfig = {
+  input: 'src/core/index.ts',
+  output: [{ file: 'dist/index.d.ts', format: 'es' }],
+  external: ['jspdf', 'dom-to-svg', 'svg2pdf.js'],
+  plugins: [dts({ tsconfig: './tsconfig.json' })],
+};
+
+export default [jsConfig, dtsConfig];

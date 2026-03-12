@@ -39,6 +39,7 @@
       "default": "./dist/index.esm.js"
     }
   },
+  "homepage": "https://dom-to-vector-pdf.xzboss.cn",
   "repository": {
     "type": "git",
     "url": "https://github.com/xzboss/dom-to-vector-pdf.git"
@@ -48,14 +49,19 @@
     "dist/index.esm.js",
     "dist/index.umd.js",
     "dist/index.d.ts",
-    "dist/types.d.ts",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
     "clean": "rm -rf dist",
     "build": "npm run clean && rollup -c",
+    "build:vue": "pnpm --filter vue-example build",
+    "build:react": "pnpm --filter react-example build",
+    "build:docs": "pnpm --filter dom-to-vector-pdf-docs build",
     "dev": "rollup -c -w",
+    "dev:vue": "pnpm --filter vue-example dev",
+    "dev:react": "pnpm --filter react-example dev",
+    "dev:docs": "pnpm --filter dom-to-vector-pdf-docs dev",
     "test": "jest",
     "prepublishOnly": "npm run build",
     "release": "standard-version --release-as patch",
@@ -83,6 +89,7 @@
     "lint-staged": "^13.2.3",
     "prettier": "^2.8.8",
     "rollup": "^2.79.2",
+    "rollup-plugin-dts": "^4.2.3",
     "standard-version": "^9.5.0",
     "tslib": "^2.8.1",
     "typescript": "^5.2.2"
