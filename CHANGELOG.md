@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/xzboss/dom-to-vector-pdf/compare/v1.0.4...v1.1.0) (2026-03-13)
+
+
+### Features
+
+* 结构改造 ([7466777](https://github.com/xzboss/dom-to-vector-pdf/commit/7466777a1530cdcbc71e206b73d0032f3b0c8bbd))
+
 ## [1.1.0](https://github.com/xzboss/dom-to-vector-pdf/compare/v1.0.4...v1.1.0) (2026-03-12)
 
 
