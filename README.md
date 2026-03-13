@@ -7,6 +7,7 @@ A tool for converting DOM elements to vector PDFs using jsPDF, dom-to-svg and sv
 ## Online Demo
 
 [Online Demo](https://dom-to-vector-pdf.xzboss.cn/vue-example)
+[docs](https://dom-to-vector-pdf.xzboss.cn/docs)
 
 ## Installation
 

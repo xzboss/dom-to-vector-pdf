@@ -7,6 +7,8 @@
 ## 在线示例
 
 [在线演示](https://dom-to-vector-pdf.xzboss.cn/vue-example)
+[docs](https://dom-to-vector-pdf.xzboss.cn/docs)
+
 
 ## 安装
 

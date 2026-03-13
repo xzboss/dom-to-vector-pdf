@@ -1,7 +1,7 @@
 <template>
   <header class="app-header">
     <div class="header-brand">
-      <h1>DOM to Vector PDF</h1>
+      <h1 @click="goTO">DOM to Vector PDF</h1>
       <span class="header-badge">Demo</span>
     </div>
     <div class="header-links">
@@ -11,6 +11,11 @@
   </header>
 </template>
 
+<script setup lang="ts">
+const goTO = () => {
+  window.open('https://dom-to-vector-pdf.xzboss.cn/docs', '_blank')
+}
+</script>
 <style scoped>
 .app-header {
   display: flex;
